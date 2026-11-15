@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Gás Inteligente — A tua energia, sob controlo',
-  description: 'Acompanha o consumo de botijas, prevê a próxima reposição e encontra fornecedores de gás propano e butano em Portugal.',
+  title: 'Gás Inteligente — Encontra o gás certo para tua casa',
+  description: 'Descobre uma oferta de gás simulada para a tua localização, personaliza as tuas preferências e conversa com o assistente Gás Inteligente.',
   generator: 'v0.app',
   icons: {
     icon: [
