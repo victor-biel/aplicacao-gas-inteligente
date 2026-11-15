@@ -11,7 +11,7 @@ export default async function Page() {
 
   const [userResult, preferencesResult] = await Promise.all([
     supabase.from('users').select('id, nome, email, cidade, codigo_postal').eq('id', user.id).maybeSingle(),
-    supabase.from('preferences').select('tipo_gas, entrega_domicilio, marca_favorita, consumo_mensal').eq('user_id', user.id).maybeSingle(),
+    supabase.from('preferences').select('tipo_gas, entrega_domicilio, marca_favorita, consumo_mensal, fornecedor_favorito').eq('user_id', user.id).maybeSingle(),
   ])
 
   const purchaseRows: Array<{ id: string; data: string; fornecedor: string; marca: string; valor: number | string; tipo_gas: string }> = []
@@ -45,6 +45,7 @@ export default async function Page() {
     gasType,
     frequency: preferencesResult.data?.consumo_mensal ?? metadata.consumo_mensal ?? defaultPreferences.frequency,
     brand: preferencesResult.data?.marca_favorita ?? metadata.marca_favorita ?? defaultPreferences.brand,
+    favoriteSupplier: preferencesResult.data?.fornecedor_favorito ?? metadata.fornecedor_favorito ?? '',
     homeDelivery: preferencesResult.data?.entrega_domicilio ?? metadata.entrega_domicilio === 'true',
   }
 

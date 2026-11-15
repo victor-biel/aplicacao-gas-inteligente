@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Gás Inteligente — Acompanha as compras de gás da tua casa',
-  description: 'Regista compras de gás, acompanha os valores e guarda num só lugar as preferências da tua casa.',
+  title: 'Gás Inteligente — Consumo e reposição de gás',
+  description: 'Acompanha o consumo e os gastos com gás, estima a próxima reposição e guarda as preferências da tua casa.',
   generator: 'v0.app',
   icons: {
     icon: [

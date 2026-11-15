@@ -1,5 +1,5 @@
 export type GasType = 'Propano' | 'Butano' | 'Pluma'
-export type DashboardView = 'Visão geral' | 'Histórico' | 'Perfil'
+export type DashboardView = 'Visão geral' | 'Histórico' | 'Assistente' | 'Perfil'
 
 export type UserProfile = {
   id: string
@@ -10,6 +10,7 @@ export type UserProfile = {
   gasType: GasType
   frequency: string
   brand: string
+  favoriteSupplier: string
   homeDelivery: boolean
 }
 

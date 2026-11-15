@@ -18,6 +18,7 @@ export function AuthScreen() {
   const [postalCode, setPostalCode] = useState('')
   const [gasType, setGasType] = useState<GasType>('Propano')
   const [brand, setBrand] = useState('Galp')
+  const [favoriteSupplier, setFavoriteSupplier] = useState('')
   const [frequency, setFrequency] = useState('Quando preciso')
   const [homeDelivery, setHomeDelivery] = useState(true)
   const [busy, setBusy] = useState(false)
@@ -44,6 +45,7 @@ export function AuthScreen() {
             tipo_gas: gasType,
             entrega_domicilio: String(homeDelivery),
             marca_favorita: brand,
+            fornecedor_favorito: favoriteSupplier.trim(),
             consumo_mensal: frequency,
           },
         },
@@ -121,8 +123,9 @@ export function AuthScreen() {
                 </div>
                 <div className="auth-form-grid">
                   <label className="auth-field">Tipo de gás<select value={gasType} onChange={(event) => setGasType(event.target.value as GasType)}>{gasTypes.map((option) => <option key={option}>{option}</option>)}</select></label>
-                  <label className="auth-field">Marca habitual<select value={brand} onChange={(event) => setBrand(event.target.value)}><option>Galp</option><option>Rubis</option><option>Repsol</option><option>Outra</option></select></label>
+                  <label className="auth-field">Marca favorita<select value={brand} onChange={(event) => setBrand(event.target.value)}><option>Galp</option><option>Rubis</option><option>Repsol</option><option>Outra</option></select></label>
                 </div>
+                <label className="auth-field">Fornecedor favorito<input maxLength={100} value={favoriteSupplier} onChange={(event) => setFavoriteSupplier(event.target.value)} placeholder="Opcional — a tua loja habitual" autoComplete="organization" /></label>
                 <label className="auth-field">Frequência de compra<select value={frequency} onChange={(event) => setFrequency(event.target.value)}><option>1 botija por mês</option><option>2 botijas por mês</option><option>1 botija a cada 2 meses</option><option>Quando preciso</option></select></label>
                 <label className="auth-delivery"><input type="checkbox" checked={homeDelivery} onChange={(event) => setHomeDelivery(event.target.checked)} /><span>Prefiro entrega ao domicílio</span></label>
               </>}
