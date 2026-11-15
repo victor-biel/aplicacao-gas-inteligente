@@ -2,11 +2,12 @@
 
 import { useMemo, useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowRight, BarChart3, BrainCircuit, CalendarDays, Check, ChevronDown, ClipboardList, Flame, House, LogOut, MapPin, Pencil, Plus, ShoppingBag, UserRound, Wallet } from 'lucide-react'
+import { ArrowRight, BarChart3, BrainCircuit, CalendarDays, Check, ChevronDown, ClipboardList, Flame, House, LogOut, MapPin, Pencil, Plus, Search, ShoppingBag, UserRound, Wallet } from 'lucide-react'
 import { GasAssistant } from '@/components/gas-inteligente/gas-assistant'
 import { SpendingChart } from '@/components/gas-inteligente/spending-chart'
 import { getDaysSincePurchase, getMonthlyConsumption, getMonthlySpending, getRefillEstimate } from '@/lib/gas-insights'
 import { PurchaseDialog } from '@/components/gas-inteligente/purchase-dialog'
+import { SupplierSearch } from '@/components/gas-inteligente/supplier-search'
 import { createClient } from '@/lib/supabase/client'
 import { formatEuro, formatPurchaseDate, gasTypes, type DashboardView, type GasType, type Purchase, type UserProfile } from '@/lib/gas-types'
 
@@ -19,6 +20,7 @@ type DashboardAppProps = {
 const navigation: { view: DashboardView; label: string; icon: typeof House }[] = [
   { view: 'Visão geral', label: 'Visão geral', icon: House },
   { view: 'Histórico', label: 'Histórico de compras', icon: ClipboardList },
+  { view: 'Fornecedores', label: 'Encontrar fornecedores', icon: Search },
   { view: 'Assistente', label: 'Assistente inteligente', icon: BrainCircuit },
   { view: 'Perfil', label: 'Perfil e preferências', icon: UserRound },
 ]
@@ -132,6 +134,8 @@ export function DashboardApp({ initialProfile, initialPurchases, profileReady: i
             <div className="history-summary"><span className="history-summary-icon"><ShoppingBag size={17} /></span><div><strong>{purchases.length} {purchases.length === 1 ? 'compra registada' : 'compras registadas'}</strong><small>Total acumulado: {formatEuro(totalSpent)}</small></div></div>
             {purchases.length ? <div className="history-list" aria-label="Compras registadas">{purchases.map((purchase) => <PurchaseRow key={purchase.id} purchase={purchase} expanded />)}</div> : <div className="history-empty"><span><ClipboardList size={22} /></span><h2>O teu histórico começa aqui.</h2><p>Regista as tuas compras para teres todos os valores e datas num só lugar.</p><button type="button" className="mvp-primary-button" onClick={() => setShowPurchaseDialog(true)} disabled={!profileReady}><Plus size={15} /> Registar a primeira compra</button></div>}
           </section>}
+
+          {view === 'Fornecedores' && <SupplierSearch profile={profile} purchases={purchases} />}
 
           {view === 'Assistente' && <GasAssistant purchases={purchases} frequency={profile.frequency} onClose={() => setView('Visão geral')} />}
 
